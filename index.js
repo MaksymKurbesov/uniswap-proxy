@@ -27,23 +27,23 @@ app.use('/proxy', async (req, res) => {
   res.setHeader('X-Cache', 'Miss from cloudfront');
 
   // Установка cookie (если требуется)
-  res.cookie('__cfseq-0rnh-Yvry', '0lv2Zo3XKd6vViUJPY04tsGLanmWohkZHzBeTYq_OCghPtx98R73qK-M1jQDHum7Nrs', {
-    path: '/',
-    expires: new Date(Date.now() + 60 * 60 * 1000),
-    domain: '.uniswap.org',
-    httpOnly: true,
-    secure: true,
-    sameSite: 'None'
-  });
-
-  res.cookie('__cf_bm', '.8PwgqW0ehRbuzkM5iN8VntzoEP0dlsEu.pYI0IJZEk-1733924088-1.0.1.1-EKV0j1sGFH9yJglGptF6J401l81PZ6quem0LEOh.eGpkzBzYE0.Fzr5oV6PT0nf_tUWlX.67kJiks3zWsfVCsA', {
-    path: '/',
-    expires: new Date(Date.now() + 30 * 60 * 1000),
-    domain: '.uniswap.org',
-    httpOnly: true,
-    secure: true,
-    sameSite: 'None'
-  });
+  // res.cookie('__cfseq-0rnh-Yvry', '0lv2Zo3XKd6vViUJPY04tsGLanmWohkZHzBeTYq_OCghPtx98R73qK-M1jQDHum7Nrs', {
+  //   path: '/',
+  //   expires: new Date(Date.now() + 60 * 60 * 1000),
+  //   domain: '.uniswap.org',
+  //   httpOnly: true,
+  //   secure: true,
+  //   sameSite: 'None'
+  // });
+  //
+  // res.cookie('__cf_bm', '.8PwgqW0ehRbuzkM5iN8VntzoEP0dlsEu.pYI0IJZEk-1733924088-1.0.1.1-EKV0j1sGFH9yJglGptF6J401l81PZ6quem0LEOh.eGpkzBzYE0.Fzr5oV6PT0nf_tUWlX.67kJiks3zWsfVCsA', {
+  //   path: '/',
+  //   expires: new Date(Date.now() + 30 * 60 * 1000),
+  //   domain: '.uniswap.org',
+  //   httpOnly: true,
+  //   secure: true,
+  //   sameSite: 'None'
+  // });
 
   res.setHeader('Content-Type', 'application/json');
   res.send(data);
