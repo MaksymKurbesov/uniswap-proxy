@@ -3,14 +3,14 @@ const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fet
 const cors = require('cors');
 
 const app = express();
+app.use(express.json());
 app.use(cors());
 
 app.use('/proxy', async (req, res) => {
   const response = await fetch('https://interface.gateway.uniswap.org/v1/graphql', {
     method: req.method,
     headers: {
-      'Content-Type': 'application/json',
-      // Скопируйте остальные необходимые заголовки запроса при необходимости
+      'Content-Type': 'application/json'
     },
     body: req.method === 'POST' ? JSON.stringify(req.body) : null
   });
