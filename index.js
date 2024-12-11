@@ -51,18 +51,18 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/proxy', (req, res) => {
-  request(
-    { url: `${API_URL}` },
-    (error, response, body) => {
-      if (error || response.statusCode !== 200) {
-        return res.status(500).json({ type: 'error', message: error.message });
-      }
-
-      res.json(JSON.parse(body));
-    }
-  );
-});
+// app.get('/proxy', (req, res) => {
+//   request(
+//     { url: `${API_URL}` },
+//     (error, response, body) => {
+//       if (error || response.statusCode !== 200) {
+//         return res.status(500).json({ type: 'error', message: error.message });
+//       }
+//
+//       res.json(JSON.parse(body));
+//     }
+//   );
+// });
 
 app.post('/proxy', (req, res) => {
   request(
