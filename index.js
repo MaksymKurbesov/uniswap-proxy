@@ -18,13 +18,13 @@ app.use('/proxy', async (req, res) => {
 
   const data = await response.text();
 
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Content-Encoding', 'gzip');
-  res.setHeader('Content-Type', 'application/json;charset=UTF-8');
-  res.setHeader('Date', new Date().toUTCString());
-  res.setHeader('Server', 'cloudflare');
-  res.setHeader('Strict-Transport-Security', 'max-age=15552000; includeSubDomains; preload');
-  res.setHeader('X-Cache', 'Miss from cloudfront');
+  // res.setHeader('Access-Control-Allow-Origin', '*');
+  // res.setHeader('Content-Encoding', 'gzip');
+  // res.setHeader('Content-Type', 'application/json;charset=UTF-8');
+  // res.setHeader('Date', new Date().toUTCString());
+  // res.setHeader('Server', 'cloudflare');
+  // res.setHeader('Strict-Transport-Security', 'max-age=15552000; includeSubDomains; preload');
+  // res.setHeader('X-Cache', 'Miss from cloudfront');
 
   // Установка cookie (если требуется)
   // res.cookie('__cfseq-0rnh-Yvry', '0lv2Zo3XKd6vViUJPY04tsGLanmWohkZHzBeTYq_OCghPtx98R73qK-M1jQDHum7Nrs', {
@@ -44,8 +44,7 @@ app.use('/proxy', async (req, res) => {
   //   secure: true,
   //   sameSite: 'None'
   // });
-
-  res.setHeader('Content-Type', 'application/json');
+  
   res.send(data);
 });
 
