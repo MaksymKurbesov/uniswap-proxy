@@ -1,29 +1,25 @@
 const express = require('express');
+const fetch = require('node-fetch');
 const cors = require('cors');
-const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const app = express();
+app.use(cors());
 
-// Включаем CORS
-app.use(cors({
-  origin: '*', // Или укажите конкретный домен, если нужно
-  methods: 'GET, POST, OPTIONS',
-  allowedHeaders: 'Content-Type, Authorization'
-}));
+app.use('/proxy', async (req, res) => {
+  const response = await fetch('https://interface.gateway.uniswap.org/v1/graphql', {
+    method: req.method,
+    headers: {
+      'Content-Type': 'application/json',
+      // Скопируйте остальные необходимые заголовки запроса при необходимости
+    },
+    body: req.method === 'POST' ? JSON.stringify(req.body) : null
+  });
 
-// Обработка OPTIONS-запросов (Preflight)
-app.options('*', (req, res) => {
-  res.header('Access-Control-Allow-Origin', '*'); // Или укажите домен, если нужно
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.send();
+  const data = await response.text();
+  res.setHeader('Content-Type', 'application/json');
+  res.send(data);
 });
 
-// Прокси для запросов к Uniswap
-app.use('/graphql', createProxyMiddleware({
-  target: 'https://interface.gateway.uniswap.org',
-  changeOrigin: true
-}));
-
-// Запуск сервера
-app.listen(3001, () => console.log('Proxy running on http://localhost:3001'));
+app.listen(3001, () => {
+  console.log('Proxy server running on http://localhost:3001');
+});
