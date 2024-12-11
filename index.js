@@ -20,6 +20,20 @@ app.use('/proxy', async (req, res) => {
   res.send(data);
 });
 
+app.use('/proxy2', async (req, res) => {
+  const response = await fetch('https://interface.gateway.uniswap.org/v1/statsig-proxy/rgstr', {
+    method: req.method,
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: req.method === 'POST' ? JSON.stringify(req.body) : null
+  });
+
+  const data = await response.text();
+  res.setHeader('Content-Type', 'application/json');
+  res.send(data);
+});
+
 app.listen(3001, () => {
   console.log('Proxy server running on http://localhost:3001');
 });
